@@ -4,7 +4,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 6
+Release:	%mkrel 7
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
@@ -104,6 +104,12 @@ cp %{SOURCE1} dc_server.init
 cp %{SOURCE2} dc_client.init
 
 %build
+%if %mdkversion >= 200710
+export CFLAGS="%{optflags} -fstack-protector"
+export CXXFLAGS="%{optflags} -fstack-protector"
+export FFLAGS="%{optflags} -fstack-protector"
+%endif
+
 export WANT_AUTOCONF_2_5=1
 
 # bootstrap it (bootstrap.sh won't cut it...)
