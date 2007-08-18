@@ -1,10 +1,11 @@
 %define	major 1
-%define libname	%mklibname %{name} %{major}
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname -d %{name}
 
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
@@ -71,14 +72,16 @@ caching with supported OpenSSL-based applications. The caching protocol and API
 is independent of SSL/TLS specifics and could be useful in other (non-SSL/TLS)
 circumstances.
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Libraries and header files for building distcache-compatible software
 Group:		Development/C
 Requires:	%{libname} = %{version}
-Provides:	lib%{name}-devel = %{version}
+Provides:	%{libname}-devel = %{version}
+Obsoletes:	%{libname}-devel
 Provides:	%{name}-devel = %{version}
+Obsoletes:	%{name}-devel
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 This package includes the libraries and header files from the distcache project
 that are required to compile
 distcache-compatible software.
@@ -197,7 +200,7 @@ chrpath -d %{buildroot}%{_bindir}/sslswamp
 %defattr(-,root,root)
 %{_libdir}/*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_includedir}/libnal
 %{_includedir}/distcache
@@ -205,5 +208,3 @@ chrpath -d %{buildroot}%{_bindir}/sslswamp
 %{_libdir}/*.la
 %{_libdir}/*.a
 %{_mandir}/man2/*.2*
-
-
