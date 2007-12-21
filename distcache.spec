@@ -16,6 +16,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	chrpath
 BuildRequires:	automake1.7
 BuildRequires:	autoconf2.5
+Buildroot:	%{_tmppath}/%{name}-buildroot
 
 %description
 This package provides tools from the distcache project to deploy a distributed
