@@ -5,7 +5,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 9
+Release:	%mkrel 10
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
