@@ -92,7 +92,6 @@ Group:		System/Servers
 Requires:	%{libname} = %{version}
 
 %description	utils
-
  o dc_snoop - Distributed session cache traffic analysis.
  o dc_test - Distributed session cache testing and benchmarking tool.
  o nal_test - benchmarking and self-testing libnal program.
