@@ -5,7 +5,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 10
+Release:	%mkrel 11
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
@@ -16,7 +16,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	chrpath
 BuildRequires:	automake1.7
 BuildRequires:	autoconf2.5
-Buildroot:	%{_tmppath}/%{name}-buildroot
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 This package provides tools from the distcache project to deploy a distributed
