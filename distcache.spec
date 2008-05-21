@@ -12,6 +12,8 @@ URL:		http://www.distcache.org/
 Source0:	http://prdownloads.sourceforge.net/distcache/%{name}-%{version}.tar.bz2
 Source1:	dc_server.init
 Source2:	dc_client.init
+Patch0:		distcache-limits.diff
+Patch1:		distcache-libdeps.diff
 BuildRequires:	openssl-devel
 BuildRequires:	chrpath
 BuildRequires:	automake1.7
@@ -101,6 +103,8 @@ Requires:	%{libname} = %{version}
 %prep
 
 %setup -q -n %{name}-%{version}
+%patch0 -p0
+%patch1 -p1
 
 cp %{SOURCE1} dc_server.init
 cp %{SOURCE2} dc_client.init
