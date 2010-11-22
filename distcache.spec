@@ -5,7 +5,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 17
+Release:	%mkrel 18
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
@@ -15,6 +15,7 @@ Source2:	dc_client.init
 Patch0:		distcache-limits.diff
 Patch1:		distcache-libdeps.diff
 Patch2:		distcache-1.5.1-autopoo_fixes.diff
+Patch3:		distcache-1.5.1-cvs_fixes.diff
 BuildRequires:	openssl-devel
 BuildRequires:	chrpath
 BuildRequires:	automake1.7
@@ -107,6 +108,7 @@ Requires:	%{libname} = %{version}
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 cp %{SOURCE1} dc_server.init
 cp %{SOURCE2} dc_client.init
