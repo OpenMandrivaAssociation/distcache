@@ -5,7 +5,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 18
+Release:	%mkrel 19
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
@@ -18,7 +18,7 @@ Patch2:		distcache-1.5.1-autopoo_fixes.diff
 Patch3:		distcache-1.5.1-cvs_fixes.diff
 BuildRequires:	openssl-devel
 BuildRequires:	chrpath
-BuildRequires:	automake1.7
+BuildRequires:	automake
 BuildRequires:	autoconf2.5
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -119,10 +119,10 @@ cp %{SOURCE2} dc_client.init
 export WANT_AUTOCONF_2_5=1
 
 # bootstrap it (bootstrap.sh won't cut it...)
-libtoolize --copy --force; aclocal-1.7; autoheader; autoconf; automake-1.7 --foreign --add-missing
+libtoolize --copy --force; aclocal; autoheader; autoconf; automake --foreign --add-missing
 
 pushd ssl
-    libtoolize --copy --force; aclocal-1.7; autoheader; autoconf; automake-1.7 --foreign --add-missing
+    libtoolize --copy --force; aclocal; autoheader; autoconf; automake --foreign --add-missing
 popd
 
 export CFLAGS="$CFLAGS -fPIC"
