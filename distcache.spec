@@ -5,7 +5,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 20
+Release:	%mkrel 21
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
@@ -152,6 +152,10 @@ mv %{buildroot}%{_bindir}/nal* %{buildroot}%{_sbindir}/
 
 # delete rpath
 chrpath -d %{buildroot}%{_bindir}/sslswamp
+
+%if "%{_lib}" == "lib64"
+perl -pi -e "s|-L/usr/lib\b|-L%{_libdir}|g" %{buildroot}%{_libdir}/*.la
+%endif
 
 %post server
 %_post_service dc_server
