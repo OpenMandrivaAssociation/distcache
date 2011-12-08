@@ -5,7 +5,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	%mkrel 21
+Release:	22
 License:	LGPL
 Group:		System/Servers
 URL:		http://www.distcache.org/
@@ -18,9 +18,7 @@ Patch2:		distcache-1.5.1-autopoo_fixes.diff
 Patch3:		distcache-1.5.1-cvs_fixes.diff
 BuildRequires:	openssl-devel
 BuildRequires:	chrpath
-BuildRequires:	automake
-BuildRequires:	autoconf2.5
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	autoconf automake libtool
 
 %description
 This package provides tools from the distcache project to deploy a distributed
@@ -79,7 +77,7 @@ circumstances.
 %package -n	%{develname}
 Summary:	Libraries and header files for building distcache-compatible software
 Group:		Development/C
-Requires:	%{libname} = %{version}
+Requires:	%{libname} >= %{version}
 Provides:	%{libname}-devel = %{version}
 Obsoletes:	%{libname}-devel
 Provides:	%{name}-devel = %{version}
@@ -93,7 +91,7 @@ distcache-compatible software.
 %package	utils
 Summary:	Utilities for testing and benchmarking %{name} SSL/TLS servers
 Group:		System/Servers
-Requires:	%{libname} = %{version}
+Requires:	%{libname} >= %{version}
 
 %description	utils
  o dc_snoop - Distributed session cache traffic analysis.
@@ -129,14 +127,14 @@ export CFLAGS="$CFLAGS -fPIC"
 
 %configure2_5x \
     --enable-shared \
-    --enable-static \
+    --disable-static \
     --enable-ssl \
     --enable-swamp \
     --with-ssl=%{_prefix}
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall
 
@@ -153,9 +151,8 @@ mv %{buildroot}%{_bindir}/nal* %{buildroot}%{_sbindir}/
 # delete rpath
 chrpath -d %{buildroot}%{_bindir}/sslswamp
 
-%if "%{_lib}" == "lib64"
-perl -pi -e "s|-L/usr/lib\b|-L%{_libdir}|g" %{buildroot}%{_libdir}/*.la
-%endif
+# cleanup
+rm -f %{buildroot}%{_libdir}/*.*a
 
 %post server
 %_post_service dc_server
@@ -169,19 +166,7 @@ perl -pi -e "s|-L/usr/lib\b|-L%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %preun client
 %_preun_service dc_client
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %files server
-%defattr(-,root,root,0755)
 %doc ANNOUNCE BUGS CHANGES FAQ README
 %attr(0755,root,root) %{_initrddir}/dc_server
 %attr(0755,root,root) %{_sbindir}/dc_server
@@ -189,14 +174,12 @@ perl -pi -e "s|-L/usr/lib\b|-L%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %{_mandir}/man8/distcache.8*
 
 %files client
-%defattr(-,root,root,0755)
 %doc ANNOUNCE BUGS CHANGES FAQ README
 %attr(0755,root,root) %{_initrddir}/dc_client
 %attr(0755,root,root) %{_sbindir}/dc_client
 %{_mandir}/man1/dc_client.1*
 
 %files utils
-%defattr(-,root,root)
 %attr(0755,root,root) %{_bindir}/piper
 %attr(0755,root,root) %{_bindir}/sslswamp
 %attr(0755,root,root) %{_sbindir}/dc_snoop
@@ -212,14 +195,10 @@ perl -pi -e "s|-L/usr/lib\b|-L%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %{_mandir}/man1/dc_test.1*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/libnal
 %{_includedir}/distcache
 %{_libdir}/*.so
-%{_libdir}/*.la
-%{_libdir}/*.a
 %{_mandir}/man2/*.2*
