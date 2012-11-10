@@ -1,0 +1,35 @@
+diff -Naur distcache-1.5.1/libdistcache/Makefile.am distcache-1.5.1.oden/libdistcache/Makefile.am
+--- distcache-1.5.1/libdistcache/Makefile.am	2003-06-06 15:50:06.000000000 -0400
++++ distcache-1.5.1.oden/libdistcache/Makefile.am	2008-05-21 12:10:43.000000000 -0400
+@@ -3,4 +3,5 @@
+ lib_LTLIBRARIES		= libdistcache.la
+ libdistcache_la_SOURCES = dc_client.c dc_enc.c
+ libdistcache_la_LDFLAGS	= -version-info 1:1:0
++libdistcache_la_LIBADD	= ../libnal/libnal.la
+ 
+diff -Naur distcache-1.5.1/libdistcacheserver/Makefile.am distcache-1.5.1.oden/libdistcacheserver/Makefile.am
+--- distcache-1.5.1/libdistcacheserver/Makefile.am	2003-06-06 15:50:06.000000000 -0400
++++ distcache-1.5.1.oden/libdistcacheserver/Makefile.am	2008-05-21 12:10:43.000000000 -0400
+@@ -3,4 +3,5 @@
+ lib_LTLIBRARIES			= libdistcacheserver.la
+ libdistcacheserver_la_SOURCES	= dc_server.c dc_server_default.c
+ libdistcacheserver_la_LDFLAGS	= -version-info 1:1:0
++libdistcacheserver_la_LIBADD	= ../libdistcache/libdistcache.la ../libnal/libnal.la 
+ 
+diff -Naur distcache-1.5.1/libsys/Makefile.am distcache-1.5.1.oden/libsys/Makefile.am
+--- distcache-1.5.1/libsys/Makefile.am	2004-03-23 20:56:46.000000000 -0500
++++ distcache-1.5.1.oden/libsys/Makefile.am	2008-05-21 12:10:43.000000000 -0400
+@@ -3,5 +3,4 @@
+ # libsys is not installed, it's for internal use only
+ noinst_LTLIBRARIES	= libsys.la
+ libsys_la_SOURCES	= sys.c
+-libsys_la_LDFLAGS	= -static
+ 
+diff -Naur distcache-1.5.1/ssl/libnalssl/Makefile.am distcache-1.5.1.oden/ssl/libnalssl/Makefile.am
+--- distcache-1.5.1/ssl/libnalssl/Makefile.am	2004-04-30 13:09:14.000000000 -0400
++++ distcache-1.5.1.oden/ssl/libnalssl/Makefile.am	2008-05-21 12:11:36.000000000 -0400
+@@ -3,3 +3,4 @@
+ lib_LTLIBRARIES		= libnalssl.la
+ libnalssl_la_SOURCES	= bss_nal.c
+ libnalssl_la_LDFLAGS	= -version-info 1:1:0
++libnalssl_la_LIBADD	= ../../libnal/libnal.la

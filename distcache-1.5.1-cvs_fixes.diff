@@ -1,0 +1,44 @@
+diff -Naurp distcache-1.5.1/libnal/sel_poll.c distcache-1.5.1.oden/libnal/sel_poll.c
+--- distcache-1.5.1/libnal/sel_poll.c	2004-04-30 14:57:59.000000000 +0200
++++ distcache-1.5.1.oden/libnal/sel_poll.c	2010-11-23 00:26:34.463898789 +0100
+@@ -66,8 +66,8 @@ typedef struct st_sel_ctx {
+ } sel_ctx;
+ #define OBJ_TABLE_START		32
+ #define POLLFD_TABLE_START	4	/* Just for testing */
+-#define IDX2TOKEN(idx) (NAL_SELECTOR_TOKEN)((unsigned int)idx | 0x8000)
+-#define TOKEN2IDX(tok) ((unsigned int)tok & 0x7FFF)
++#define IDX2TOKEN(idx) (NAL_SELECTOR_TOKEN)((unsigned long)idx | 0x8000)
++#define TOKEN2IDX(tok) (unsigned int)((unsigned long)tok & 0x7FFF)
+ 
+ /* Helper functions for the object table */
+ static void obj_table_zilch(sel_obj *items, unsigned int num)
+diff -Naurp distcache-1.5.1/libnal/sel_select.c distcache-1.5.1.oden/libnal/sel_select.c
+--- distcache-1.5.1/libnal/sel_select.c	2004-04-30 14:57:59.000000000 +0200
++++ distcache-1.5.1.oden/libnal/sel_select.c	2010-11-23 00:26:39.032549980 +0100
+@@ -65,8 +65,8 @@ typedef struct st_sel_ctx {
+ 	unsigned int obj_used, obj_size;
+ } sel_ctx;
+ #define OBJ_TABLE_START	32
+-#define IDX2TOKEN(idx) (NAL_SELECTOR_TOKEN)((unsigned int)idx | 0x8000)
+-#define TOKEN2IDX(tok) ((unsigned int)tok & 0x7FFF)
++#define IDX2TOKEN(idx) (NAL_SELECTOR_TOKEN)((unsigned long)idx | 0x8000)
++#define TOKEN2IDX(tok) (unsigned int)((unsigned long)tok & 0x7FFF)
+ 
+ /* Helper functions for the object table */
+ static void obj_table_zilch(sel_obj *items, unsigned int num)
+diff -Naurp distcache-1.5.1/libsys/sys.c distcache-1.5.1.oden/libsys/sys.c
+--- distcache-1.5.1/libsys/sys.c	2004-04-30 14:57:59.000000000 +0200
++++ distcache-1.5.1.oden/libsys/sys.c	2010-11-23 00:26:44.469135477 +0100
+@@ -236,10 +236,9 @@ int SYS_expirycheck(const struct timeval
+ 		const struct timeval *timenow)
+ {
+ 	struct timeval threshold;
+-	unsigned long usec_expiry = msec_expiry * 1000;
+ 	SYS_memcpy(struct timeval, &threshold, timeitem);
+-	threshold.tv_sec = threshold.tv_sec + (usec_expiry / 1000000L);
+-	threshold.tv_usec += (usec_expiry % 1000000);
++	threshold.tv_sec = threshold.tv_sec + (msec_expiry / 1000);
++	threshold.tv_usec += (msec_expiry % 1000) * 1000;
+ 	if(threshold.tv_usec > 1000000) {
+ 		threshold.tv_usec -= 1000000;
+ 		threshold.tv_sec++;
