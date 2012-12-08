@@ -1,4 +1,2 @@
 sources:
-  "dc_client.init:"	6bf1d319dc3d29215194d4c3d0574b933b4b60b8
-  "dc_server.init:"	ac7e95cdca02b90d1b3afd07ed45cdbeebfc9fe6
-  "distcache-1.5.1.tar.bz2:"	196bb398fdd85e17087bac004cf24cfc8bcbf8d5
+  "distcache-1.5.1.tar.bz2": 196bb398fdd85e17087bac004cf24cfc8bcbf8d5
