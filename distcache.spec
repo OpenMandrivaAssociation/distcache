@@ -16,6 +16,7 @@ Patch0:		distcache-limits.diff
 Patch1:		distcache-libdeps.diff
 Patch2:		distcache-1.5.1-autopoo_fixes.diff
 Patch3:		distcache-1.5.1-cvs_fixes.diff
+Patch4:		distcache-1.5.1-automake-1.13.patch
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	chrpath
 BuildRequires:	autoconf automake libtool
@@ -104,6 +105,7 @@ Requires:	%{libname} = %{version}-%{release}
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1 -b .am113~
 
 cp %{SOURCE1} dc_server.init
 cp %{SOURCE2} dc_client.init

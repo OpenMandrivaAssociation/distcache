@@ -1,0 +1,22 @@
+--- distcache-1.5.1/configure.ac.bero	2013-01-15 19:34:50.781405822 +0100
++++ distcache-1.5.1/configure.ac	2013-01-15 19:34:56.529337215 +0100
+@@ -12,7 +12,7 @@ echo "----------------------------------
+ AM_INIT_AUTOMAKE(distcache, 1.5.1)
+ 
+ AC_CONFIG_SRCDIR(sessserver/server.c)
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ 
+ # Checks for programs.
+ AC_PROG_CC
+--- distcache-1.5.1/ssl/configure.ac.bero	2013-01-15 19:36:19.356345612 +0100
++++ distcache-1.5.1/ssl/configure.ac	2013-01-15 19:36:25.777268571 +0100
+@@ -10,7 +10,7 @@ echo "----------------------------------
+ AM_INIT_AUTOMAKE(distcache-ssl, 1.5.1)
+ 
+ AC_CONFIG_SRCDIR(swamp/swamp.c)
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ 
+ # Checks for programs.
+ AC_PROG_CC
