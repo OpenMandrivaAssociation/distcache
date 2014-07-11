@@ -8,7 +8,7 @@
 Summary:	Programs to provide a distributed session caching architecture
 Name:		distcache
 Version:	1.5.1
-Release:	28
+Release:	29
 License:	LGPL
 Group:		System/Servers
 Url:		http://www.distcache.org/
