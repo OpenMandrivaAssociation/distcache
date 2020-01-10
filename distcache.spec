@@ -124,7 +124,7 @@ Group:		System/Servers
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 cp %{SOURCE1} dc_server.init
 cp %{SOURCE2} dc_client.init
