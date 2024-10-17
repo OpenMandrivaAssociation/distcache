@@ -11,7 +11,7 @@ Version:	1.5.1
 Release:	33
 License:	LGPL
 Group:		System/Servers
-Url:		http://www.distcache.org/
+Url:		https://www.distcache.org/
 Source0:	http://prdownloads.sourceforge.net/distcache/%{name}-%{version}.tar.bz2
 Source1:	dc_server.init
 Source2:	dc_client.init
