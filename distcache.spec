@@ -21,6 +21,11 @@ Patch2:		distcache-1.5.1-autopoo_fixes.diff
 Patch3:		distcache-1.5.1-cvs_fixes.diff
 Patch4:		distcache-1.5.1-automake-1.13.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	chrpath
 BuildRequires:	libtool
 BuildRequires:	pkgconfig(openssl)
